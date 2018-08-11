@@ -90,88 +90,123 @@
         })
         
         var factoryAbiArray = [
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "getAllContracts",
-            "outputs": [
-              {
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_principal",
+                "type": "uint256"
+            },
+            {
+                "name": "_collAmount",
+                "type": "uint256"
+            },
+            {
+                "name": "_duration",
+                "type": "uint256"
+            },
+            {
+                "name": "_rate",
+                "type": "uint256"
+            },
+            {
+                "name": "_loanExpWeeks",
+                "type": "uint256"
+            }
+        ],
+        "name": "createContract",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "allContracts",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "contractCount",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "factoryOwner",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "getAllContracts",
+        "outputs": [
+            {
                 "name": "",
                 "type": "address[]"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": false,
-            "inputs": [],
-            "name": "createContract",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [
-              {
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "name": "allEscrowContracts",
-            "outputs": [
-              {
-                "name": "",
-                "type": "address"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "escrowCount",
-            "outputs": [
-              {
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [
-              {
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
                 "name": "queryID",
                 "type": "uint256"
-              }
-            ],
-            "name": "getByID",
-            "outputs": [
-              {
+            }
+        ],
+        "name": "getByID",
+        "outputs": [
+            {
                 "name": "",
                 "type": "address"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "inputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "constructor"
-          }
-        ];
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }
+];
         
         web3.eth.defaultAccount=web3.eth.accounts[0];
         var testContract = web3.eth.contract(factoryAbiArray);
