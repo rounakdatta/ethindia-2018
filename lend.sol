@@ -28,7 +28,11 @@ contract Factory {
 
 contract ethindia {
     address[] lenders;
+    address[] lenders2;
+    uint[] lendinghistory;
+    uint[] lendinghistory2;
     address borrower;
+    address winbidder;
 
     uint256 principal = 0;
     uint256 collAmount = 0;
@@ -59,10 +63,31 @@ contract ethindia {
 
     }
 
+    function showlendinghistory() constant returns(uint[]) {
+      return lendinghistory;
+    }
+
+    function selectwinner(uint index) constant returns(address) {
+      return lenders[index];
+    }
+
+    function payfromwinner(uint index) {
+      lenders2.push(lenders[index]);
+      lendinghistory2.push((principal*30)/100);
+      loanFill+=(principal*30)/100;
+    }
+
+
+
+    function submitBid() public payable {
+      lenders.push(msg.sender);
+      lendinghistory.push(msg.value);
+    }
     function payToLoan() public payable {
         require(!loanFilledStatus);
 
-        lenders.push(msg.sender);
+        lenders2.push(msg.sender);
+        lendinghistory2.push(msg.value);
 
         loanFill += msg.value;
 
