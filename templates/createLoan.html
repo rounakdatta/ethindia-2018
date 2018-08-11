@@ -214,7 +214,7 @@
         var test = testContract.at("0x76d6714d2bc2a7d73536223a5494fd94426c891d");
 
         $("#createnewcontract").click(function() {
-          test.createContract($("#principal").val(),$("#collAmount").val(),$("#loanDuration").val(),$("#loanExp").val(),(error,result) => (console.log(result)));
+          test.createContract($("#principal").val(),$("#collAmount").val(),$("#loanDuration").val(),10,$("#loanExp").val(),(error,result) => (console.log(result)));
 
         });
 
