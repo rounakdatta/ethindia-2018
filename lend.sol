@@ -63,6 +63,10 @@ contract ethindia {
 
     }
 
+    function displayInfo() constant returns(uint256,uint256,uint256,uint256,uint256,uint256) {
+      return (principal,collAmount,duration,rate,loanExpWeeks,loanFill);
+    }
+
     function showlendinghistory() constant returns(uint[]) {
       return lendinghistory;
     }
