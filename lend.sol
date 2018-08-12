@@ -11,8 +11,8 @@ contract Factory {
         contractCount = 0;
     }
 
-    function createContract( uint256 _principal, uint256 _collAmount, uint256 _duration, uint256 _rate, uint256 _loanExpWeeks) public {
-        address newContract = new ethindia(_principal,_collAmount,_duration,_rate,_loanExpWeeks);
+    function createContract( uint256 _principal, uint256 _collAmount, uint256 _duration,uint256 _loanExpWeeks) public {
+        address newContract = new ethindia(_principal,_collAmount,_duration,_loanExpWeeks);
         allContracts.push(newContract);
         contractCount++;
     }
@@ -53,18 +53,17 @@ contract ethindia {
     mapping (int => address) lender;
     mapping (address => uint) lendertoamount;
 
-    function ethindia( uint256 _principal, uint256 _collAmount, uint256 _duration, uint256 _rate, uint256 _loanExpWeeks) public {
+    function ethindia( uint256 _principal, uint256 _collAmount, uint256 _duration, uint256 _loanExpWeeks) public {
         borrower = msg.sender;
         principal = _principal;
         collAmount = _collAmount;
         duration = _duration;
-        rate = _rate;
         loanExpWeeks = _loanExpWeeks;
 
     }
 
-    function displayInfo() constant returns(uint256,uint256,uint256,uint256,uint256,uint256) {
-      return (principal,collAmount,duration,rate,loanExpWeeks,loanFill);
+    function displayInfo() constant returns(address,uint256,uint256,uint256,uint256,uint256,uint256) {
+      return (address(this),principal,collAmount,duration,rate,loanExpWeeks,loanFill);
     }
 
     function showlendinghistory() constant returns(uint[]) {
@@ -83,9 +82,9 @@ contract ethindia {
 
 
 
-    function submitBid() public payable {
+    function submitBid(uint value) public payable {
       lenders.push(msg.sender);
-      lendinghistory.push(msg.value);
+      lendinghistory.push(value);
     }
     function payToLoan() public payable {
         require(!loanFilledStatus);

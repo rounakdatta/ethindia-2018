@@ -4,6 +4,7 @@
         <title>Bid to Loan Auction (Lender)</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="./../static/css/custom-validate.css" rel="stylesheet"/>
+        <script src="./node_modules/web3/dist/web3.min.js"></script>
     </head>
     <body>
         <div class="container">
@@ -27,16 +28,173 @@
                     </div>
                 </div>
 
-              
+
 
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <input class="btn btn-primary" type="submit" value="Submit Bid"/>
+                        <input class="btn btn-primary" type="submit" id="submit" name="submit" value="Submit Bid"/>
                     </div>
                 </div>
             </form>
         </div>
 
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script>
+           if(typeof web3 !== 'undefined')
+           {
+             web3 = new Web3(web3.currentProvider);
+           }
+           else
+           {
+             web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:3000"));
+           }
+           web3.version.getNetwork((err, netId) => {
+      switch (netId) {
+        case "1":
+          console.log('This is mainnet')
+          break
+        case "2":
+          console.log('This is the deprecated Morden test network.')
+          break
+        case "3":
+          console.log('This is the ropsten test network.')
+          break
+        case "4":
+          console.log('This is the Rinkeby test network.')
+          break
+        case "42":
+          console.log('This is the Kovan test network.')
+          break
+        default:
+          console.log('This is an unknown network.')
+      }
+      })
+
+           web3.eth.defaultAccount=web3.eth.accounts[0];
+           var testContract = web3.eth.contract([
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "selectwinner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "payfromwinner",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "loanFill",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "showlendinghistory",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "payToLoan",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "submitBid",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "payBackLoan",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"name": "_principal",
+				"type": "uint256"
+			},
+			{
+				"name": "_collAmount",
+				"type": "uint256"
+			},
+			{
+				"name": "_duration",
+				"type": "uint256"
+			},
+			{
+				"name": "_rate",
+				"type": "uint256"
+			},
+			{
+				"name": "_loanExpWeeks",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	}
+]);
+      var test = testContract.at("<>");
+
+      $("#submit").click(function() {
+        test.submitBid($("#loanId").val(),$("#bid").val(),(error,result) => (console.log(result)));
+      });
+      </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="./../static/js/custom-validate.js"></script>
