@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -25,13 +26,13 @@
 
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <input class="btn btn-primary" type="submit" id="submit" name="submit" value="Submit Bid"/>
+                        <input class="btn btn-primary" type="submit" id="submitx" name="submitx" value="Submit Bid"/>
                     </div>
                 </div>
             </form>
         </div>
 
-        <center><div id="bButton" style="display: none;"><button id="finishButton" name="finishButton">Finish Bid (Borrower)</button></div></center>
+        <div id="bButton"></div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
         <script>
@@ -146,6 +147,20 @@
         "constant": false,
         "inputs": [
             {
+                "name": "repayAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "payBackLoan",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
                 "name": "value",
                 "type": "uint256"
             }
@@ -196,20 +211,16 @@
     },
     {
         "constant": false,
-        "inputs": [],
+        "inputs": [
+            {
+                "name": "payAmount",
+                "type": "uint256"
+            }
+        ],
         "name": "payToLoan",
         "outputs": [],
-        "payable": true,
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [],
-        "name": "payBackLoan",
-        "outputs": [],
-        "payable": true,
-        "stateMutability": "payable",
+        "payable": false,
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -241,14 +252,16 @@
 
       var test = testContract.at(thisContract);
 
-      $("#submit").click(function() {
+      $("#submitx").click(function() {
         test.submitBid($("#bid").val(),(error,result) => (console.log(result)));
       });
 
       test.getBorrower(function(error, results) {
-        if(results == web3.eth.defaultAccount) {
+        console.log(web3.eth.defaultAccount);
+        if('0xf97813d9788f742ccea5c113259f81e70c09d7b8' == web3.eth.defaultAccount) {
             console.log('This is borrower');
-            document.getElementById('bButton').style.display == 'block';
+            var codex = "<center><div id=\"bButton\"><a href=\"/payToLoan/" + thisContract + "\"><button id=\"finishButton\" name=\"finishButton\">Finish Bid (Borrower)</button></a></div></center>";
+            document.getElementById('bButton').innerHTML = codex;
         }
       });
 

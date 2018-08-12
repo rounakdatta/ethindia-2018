@@ -33,14 +33,14 @@ def getBidWinner(bidsAmountArray):
 	return loanalgo.getCentralTendency(bidsAmountArray)
 
 # can be used only by the lender
-@app.route('/payToLoan', methods=['GET', 'POST'])
-def payToLoan():
-	return render_template('loanPay.html')
+@app.route('/payToLoan/<loan_id>', methods=['GET', 'POST'])
+def payToLoan(loan_id):
+	return render_template('loanPay.html', loan=loan_id)
 
 # can be used only by the borrower
-@app.route('/repayLoan', methods=['GET', 'POST'])
-def repayLoan():
-	return render_template('loanRepay.html')
+@app.route('/repayLoan/<loan_id>', methods=['GET', 'POST'])
+def repayLoan(loan_id):
+	return render_template('loanRepay.html', loan=loan_id)
 
 # both lender and borrower can view the results
 @app.route('/displayResults', methods=['GET', 'POST'])

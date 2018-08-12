@@ -247,6 +247,20 @@
         "constant": false,
         "inputs": [
             {
+                "name": "repayAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "payBackLoan",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
                 "name": "value",
                 "type": "uint256"
             }
@@ -297,20 +311,16 @@
     },
     {
         "constant": false,
-        "inputs": [],
+        "inputs": [
+            {
+                "name": "payAmount",
+                "type": "uint256"
+            }
+        ],
         "name": "payToLoan",
         "outputs": [],
-        "payable": true,
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [],
-        "name": "payBackLoan",
-        "outputs": [],
-        "payable": true,
-        "stateMutability": "payable",
+        "payable": false,
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -340,7 +350,7 @@
         
         web3.eth.defaultAccount=web3.eth.accounts[0];
         var testContract = web3.eth.contract(factoryAbiArray);
-        var test = testContract.at("0xD22128E2b23Cd24Cf34267554739c62c2bD42080");
+        var test = testContract.at("0x54D6031B833d848C25ad70256306950C536BA8B1");
         
         test.getAllContracts(function(error,result1)
         {

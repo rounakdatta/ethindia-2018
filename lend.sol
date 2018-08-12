@@ -88,15 +88,15 @@ contract ethindia {
       lenders.push(msg.sender);
       lendinghistory.push(value);
     }
-    function payToLoan() public payable {
+    function payToLoan(uint payAmount) public {
         require(!loanFilledStatus);
-
+        
         lenders2.push(msg.sender);
-        lendinghistory2.push(msg.value);
+        lendinghistory2.push(payAmount);
 
-        loanFill += msg.value;
+        loanFill += payAmount;
 
-        lendertoamount[msg.sender]+=msg.value;
+        lendertoamount[msg.sender] += payAmount;
 
         if(loanFill == principal) {
             loanFilledStatus = true;
@@ -104,10 +104,10 @@ contract ethindia {
         }
     }
 
-    function payBackLoan() public payable {
+    function payBackLoan(uint repayAmount) public {
         require(msg.sender == borrower && !loanRepayStatus);
 
-        loanRepay += msg.value;
+        loanRepay += repayAmount;
         if(loanRepay == (principal + interest)) {
             loanRepayStatus = true;
         }

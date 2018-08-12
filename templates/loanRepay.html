@@ -8,20 +8,20 @@
     <body>
         <div class="container">
             <div class="page-header">
-                <h1>Repay Loan (Borrower) - </h1><h1>loanaddress</h1>
+                <h1>Repay Loan (Borrower)</h1>{{loan}}
             </div>
             <form class="form-horizontal">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="bidAmount">Bid Amount (in Wei)</label>
+                    <label class="col-sm-2 control-label" for="bidAmount">Repay Amount (in Wei)</label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="number" min="5" max="25" placeholder="Amount in Wei, NOT Ether" id="bidAmount" name="bidAmount"/>
+                        <input class="form-control" type="number" placeholder="Amount in Wei, NOT Ether" id="repayAmount" name="repayAmount"/>
                         <span class="message"></span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <input class="btn btn-primary" type="submit" value="Repay Money"/>
+                        <input class="btn btn-primary" id="submitx" name="submitx" type="submit" value="Repay Money"/>
                     </div>
                 </div>
             </form>
@@ -31,5 +31,235 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="./../static/js/custom-validate.js"></script>
         <script src="./node_modules/web3/dist/web3.min.js"></script>
+
+
+               <script>
+             if(typeof web3 !== 'undefined')
+             {
+               web3 = new Web3(web3.currentProvider);
+             }
+             else
+             {
+               alert("Install MetaMask / other Web3 Injector to use this service");
+               web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+             }
+             web3.version.getNetwork((err, netId) => {
+        switch (netId) {
+          case "1":
+            console.log('This is mainnet')
+            break
+          case "2":
+            console.log('This is the deprecated Morden test network.')
+            break
+          case "3":
+            console.log('This is the ropsten test network.')
+            break
+          case "4":
+            console.log('This is the Rinkeby test network.')
+            break
+          case "42":
+            console.log('This is the Kovan test network.')
+            break
+          default:
+            console.log('This is an unknown network.')
+        }
+        });
+        
+            var contractAbi = [
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "getBorrower",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "index",
+                "type": "uint256"
+            }
+        ],
+        "name": "selectwinner",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "index",
+                "type": "uint256"
+            }
+        ],
+        "name": "payfromwinner",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "loanFill",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "showlendinghistory",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256[]"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "repayAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "payBackLoan",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "submitBid",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "displayInfo",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            },
+            {
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "payAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "payToLoan",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "_principal",
+                "type": "uint256"
+            },
+            {
+                "name": "_collAmount",
+                "type": "uint256"
+            },
+            {
+                "name": "_duration",
+                "type": "uint256"
+            },
+            {
+                "name": "_loanExpWeeks",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    }
+];
+        
+        web3.eth.defaultAccount=web3.eth.accounts[0];
+        var testContract = web3.eth.contract(contractAbi);
+        var test = testContract.at('{{loan}}');
+        
+
+        $("#submitx").click(function() {
+
+            test.payBackLoan($("#repayAmount").val(), function(error, result) {
+                console.log(result);
+            });
+        });
+
+        </script>
+
+
     </body>
 </html>
