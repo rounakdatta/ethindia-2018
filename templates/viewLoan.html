@@ -346,7 +346,7 @@
                 {
               console.log(result);
                var html = "<li class=\"list-group-item\"><p><div class=\"row\">";
-                html+=result[0] + "<br>" + result[1];
+                html+= "<a href=\"/loan/" + result[0] + "\">" + result[0] + "</a>" + "<br>" + result[1];
                 for (var j = 2; j < result.length; j++)
                     {
                 html+="<br>" + result[j];

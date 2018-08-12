@@ -18,9 +18,13 @@ def createLoan():
 def viewLoans():
 	return render_template('viewLoan.html')
 
+@app.route('/loan/<loan_id>', methods=['GET', 'POST'])
+def this_tender(loan_id):
+	return render_template('loanBid.html', loan=loan_id)
+
 # can be used only by lender
 @app.route('/bidToLoan', methods=['GET', 'POST'])
-def bidToLoan():
+def bidToLoan(loans_array):
 	return render_template('loanBid.html')
 
 # just a post request, handled from client side JS

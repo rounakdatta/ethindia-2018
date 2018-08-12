@@ -12,13 +12,6 @@
                 <h1>Bid to Loan Auction (Lender)</h1>
             </div>
             <form class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="loanId">Loan ID</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" id="loanId" name="loanId"/>
-                        <span class="message"></span>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="bid">ROI Bid (in %)</label>
@@ -38,6 +31,7 @@
             </form>
         </div>
 
+        <center><div id="bButton" style="display: none;"><button id="finishButton" name="finishButton">Finish Bid (Borrower)</button></div></center>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
         <script>
@@ -189,11 +183,29 @@
 		"type": "constructor"
 	}
 ]);
-      var test = testContract.at("<>");
+
+           var thisContract = '{{loan}}';
+
+      var test = testContract.at(thisContract);
 
       $("#submit").click(function() {
-        test.submitBid($("#loanId").val(),$("#bid").val(),(error,result) => (console.log(result)));
+        test.submitBid.sendTransaction({value: 100, data: $("#bid").val()},(error,result) => (console.log(result)));
       });
+
+      test.getBorrower(function(error, results) {
+        if(results == web3.eth.defaultAccount) {
+            console.log('This is borrower');
+            document.getElementById('bButton').style.display == 'block';
+        }
+      });
+
+    $("#finishButton").click(function() {
+        test.selectwinner(3, (error, resultx) =>
+            console.log(resultx));
+            // this is the winning address (resultx)
+      });
+
+
       </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
