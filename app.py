@@ -16,7 +16,7 @@ def createLoan():
 # can be viewed by both lender and borrower
 @app.route('/viewLoans', methods=['GET', 'POST'])
 def viewLoans():
-	return render_template('viewLoans.html')
+	return render_template('viewLoan.html')
 
 # can be used only by lender
 @app.route('/bidToLoan', methods=['GET', 'POST'])

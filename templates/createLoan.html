@@ -96,6 +96,20 @@
 
         var factoryAbiArray = [
     {
+        "constant": true,
+        "inputs": [],
+        "name": "getAllContracts",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address[]"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "constant": false,
         "inputs": [
             {
@@ -111,10 +125,6 @@
                 "type": "uint256"
             },
             {
-                "name": "_rate",
-                "type": "uint256"
-            },
-            {
                 "name": "_loanExpWeeks",
                 "type": "uint256"
             }
@@ -126,20 +136,28 @@
         "type": "function"
     },
     {
+        "constant": true,
         "inputs": [],
+        "name": "factoryOwner",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
         "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "constructor"
+        "stateMutability": "view",
+        "type": "function"
     },
     {
         "constant": true,
         "inputs": [
             {
-                "name": "",
+                "name": "queryID",
                 "type": "uint256"
             }
         ],
-        "name": "allContracts",
+        "name": "getByID",
         "outputs": [
             {
                 "name": "",
@@ -166,41 +184,13 @@
     },
     {
         "constant": true,
-        "inputs": [],
-        "name": "factoryOwner",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "getAllContracts",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address[]"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
         "inputs": [
             {
-                "name": "queryID",
+                "name": "",
                 "type": "uint256"
             }
         ],
-        "name": "getByID",
+        "name": "allContracts",
         "outputs": [
             {
                 "name": "",
@@ -210,15 +200,21 @@
         "payable": false,
         "stateMutability": "view",
         "type": "function"
+    },
+    {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
     }
 ];
 
         web3.eth.defaultAccount=web3.eth.accounts[0];
         var testContract = web3.eth.contract(factoryAbiArray);
-        var test = testContract.at("0x0204314d938151c614ea0586A07A4f61D545095B");
+        var test = testContract.at("0xB2e130d85AB776C45d9E7DB9aF71c5083CfECC0D");
 
         $("#createnewcontract").click(function() {
-          test.createContract($("#principal").val(), $("#collAmount").val(), $("#loanDuration").val(), 10, $("#loanExp").val(), (error,result) => (console.log(result)));
+          test.createContract($("#principal").val(), $("#collAmount").val(), $("#loanDuration").val(), $("#loanExp").val(), (error,result) => (console.log(result)));
 
         });
 
