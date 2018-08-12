@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title></title>
+        <title>Create a Loan (Borrower)</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="./../static/css/custom-validate.css" rel="stylesheet"/>
           <script src="./node_modules/web3/dist/web3.min.js"></script>
@@ -48,7 +48,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <input class="btn btn-primary" type="submit" id="createnewcontract" name = "createnewcontract" value="Create Loan"/>
+                        <input class="btn btn-primary" id="createnewcontract" name = "createnewcontract" value="Create Loan"/>
                     </div>
                 </div>
             </form>
@@ -214,7 +214,7 @@
         var test = testContract.at("0x76d6714d2bc2a7d73536223a5494fd94426c891d");
 
         $("#createnewcontract").click(function() {
-          test.createContract($("#principal").val(),$("#collAmount").val(),$("#loanDuration").val(),10,$("#loanExp").val(),(error,result) => (console.log(result)));
+          test.createContract($("#principal").val(), $("#collAmount").val(), $("#loanDuration").val(), 10, $("#loanExp").val(), (error,result) => (console.log(result)));
 
         });
 

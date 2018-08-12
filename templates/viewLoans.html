@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title></title>
+        <title>View All Loans</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="./../static/css/custom-validate.css" rel="stylesheet"/>
     </head>
@@ -11,11 +11,188 @@
                 <h1>View All Loans</h1>
             </div>
             
-            
+
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="./../static/js/custom-validate.js"></script>
+        <script src="./node_modules/" type="text/javascript"></script>
+
+        <script>
+             if(typeof web3 !== 'undefined')
+             {
+               web3 = new Web3(web3.currentProvider);
+             }
+             else
+             {
+               alert("Install MetaMask / other Web3 Injector to use this service");
+               web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+             }
+             web3.version.getNetwork((err, netId) => {
+        switch (netId) {
+          case "1":
+            console.log('This is mainnet')
+            break
+          case "2":
+            console.log('This is the deprecated Morden test network.')
+            break
+          case "3":
+            console.log('This is the ropsten test network.')
+            break
+          case "4":
+            console.log('This is the Rinkeby test network.')
+            break
+          case "42":
+            console.log('This is the Kovan test network.')
+            break
+          default:
+            console.log('This is an unknown network.')
+        }
+        })
+        
+        var factoryAbiArray = [
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_principal",
+                "type": "uint256"
+            },
+            {
+                "name": "_collAmount",
+                "type": "uint256"
+            },
+            {
+                "name": "_duration",
+                "type": "uint256"
+            },
+            {
+                "name": "_rate",
+                "type": "uint256"
+            },
+            {
+                "name": "_loanExpWeeks",
+                "type": "uint256"
+            }
+        ],
+        "name": "createContract",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "allContracts",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "contractCount",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "factoryOwner",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "getAllContracts",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address[]"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "queryID",
+                "type": "uint256"
+            }
+        ],
+        "name": "getByID",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }
+];
+        
+        web3.eth.defaultAccount=web3.eth.accounts[0];
+        var testContract = web3.eth.contract(factoryAbiArray);
+        var test = testContract.at("0xd83652a2189630f144b5de776591c98dd7899013");
+        
+        $("#createnewcontract").click(function() {
+          test.createContract((error,result) => (console.log(result)));
+        
+        });
+        
+          var html2 = ""
+          test.getAllContracts(function(error, allContracts) {
+            html2 += "<ul class=\"list-group\">"
+        
+            for(var j = 0; j < allContracts.length; j++) {
+              html2 += ("<li class=\"list-group-item\">" + allContracts[j] + "</li>")
+            }
+            html2 += "</ul>";
+        
+            document.getElementById("box2").innerHTML = html2;
+          });
+        
+        
+        </script>
+
     </body>
 </html>
