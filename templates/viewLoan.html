@@ -170,6 +170,20 @@
             var contractAbi = [
     {
         "constant": true,
+        "inputs": [],
+        "name": "getBorrower",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
         "inputs": [
             {
                 "name": "index",
@@ -239,8 +253,8 @@
         ],
         "name": "submitBid",
         "outputs": [],
-        "payable": true,
-        "stateMutability": "payable",
+        "payable": false,
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -326,7 +340,7 @@
         
         web3.eth.defaultAccount=web3.eth.accounts[0];
         var testContract = web3.eth.contract(factoryAbiArray);
-        var test = testContract.at("0xB2e130d85AB776C45d9E7DB9aF71c5083CfECC0D");
+        var test = testContract.at("0xD22128E2b23Cd24Cf34267554739c62c2bD42080");
         
         test.getAllContracts(function(error,result1)
         {

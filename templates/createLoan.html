@@ -211,7 +211,7 @@
 
         web3.eth.defaultAccount=web3.eth.accounts[0];
         var testContract = web3.eth.contract(factoryAbiArray);
-        var test = testContract.at("0xB2e130d85AB776C45d9E7DB9aF71c5083CfECC0D");
+        var test = testContract.at("0xD22128E2b23Cd24Cf34267554739c62c2bD42080");
 
         $("#createnewcontract").click(function() {
           test.createContract($("#principal").val(), $("#collAmount").val(), $("#loanDuration").val(), $("#loanExp").val(), (error,result) => (console.log(result)));
