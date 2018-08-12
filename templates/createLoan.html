@@ -48,11 +48,15 @@
 
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <input class="btn btn-primary" id="createnewcontract" name = "createnewcontract" value="Create Loan"/>
+                        <input class="btn btn-primary" id="createnewcontract" name="createnewcontract" value="Create Loan"/>
                     </div>
                 </div>
             </form>
+
+            <br><br>
+            <center><a href="/viewLoans"><button class="btn btn-success" id="viewAll" name="viewAll">View All Loans</button></a></center>
         </div>
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -88,7 +92,7 @@
           default:
             console.log('This is an unknown network.')
         }
-        })
+        });
 
         var factoryAbiArray = [
     {
@@ -217,19 +221,6 @@
           test.createContract($("#principal").val(), $("#collAmount").val(), $("#loanDuration").val(), 10, $("#loanExp").val(), (error,result) => (console.log(result)));
 
         });
-
-          var html2 = ""
-          test.getAllContracts(function(error, allContracts) {
-            html2 += "<ul class=\"list-group\">"
-
-            for(var j = 0; j < allContracts.length; j++) {
-              html2 += ("<li class=\"list-group-item\">" + allContracts[j] + "</li>")
-            }
-            html2 += "</ul>";
-
-            document.getElementById("box2").innerHTML = html2;
-          });
-
 
         </script>
 

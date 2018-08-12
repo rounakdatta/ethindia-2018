@@ -11,13 +11,14 @@
                 <h1>View All Loans</h1>
             </div>
             
+            <div id="allContracts"></div>
 
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="./../static/js/custom-validate.js"></script>
-        <script src="./node_modules/" type="text/javascript"></script>
+        <script src="./node_modules/web3/dist/web3.min.js"></script>
 
         <script>
              if(typeof web3 !== 'undefined')
@@ -49,148 +50,142 @@
           default:
             console.log('This is an unknown network.')
         }
-        })
+        });
         
         var factoryAbiArray = [
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "name": "_principal",
-                "type": "uint256"
-            },
-            {
-                "name": "_collAmount",
-                "type": "uint256"
-            },
-            {
-                "name": "_duration",
-                "type": "uint256"
-            },
-            {
-                "name": "_rate",
-                "type": "uint256"
-            },
-            {
-                "name": "_loanExpWeeks",
-                "type": "uint256"
-            }
-        ],
-        "name": "createContract",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "allContracts",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "contractCount",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "factoryOwner",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "getAllContracts",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address[]"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "name": "queryID",
-                "type": "uint256"
-            }
-        ],
-        "name": "getByID",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    }
-];
+        {
+            "constant": false,
+                    "inputs": [
+                        {
+                            "name": "_principal",
+                            "type": "uint256"
+                        },
+                        {
+                            "name": "_collAmount",
+                            "type": "uint256"
+                        },
+                        {
+                            "name": "_duration",
+                            "type": "uint256"
+                        },
+                        {
+                            "name": "_rate",
+                            "type": "uint256"
+                        },
+                        {
+                            "name": "_loanExpWeeks",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "createContract",
+                    "outputs": [],
+                    "payable": false,
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "payable": false,
+                    "stateMutability": "nonpayable",
+                    "type": "constructor"
+                },
+                {
+                    "constant": true,
+                    "inputs": [
+                        {
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "allContracts",
+                    "outputs": [
+                        {
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "constant": true,
+                    "inputs": [],
+                    "name": "contractCount",
+                    "outputs": [
+                        {
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "constant": true,
+                    "inputs": [],
+                    "name": "factoryOwner",
+                    "outputs": [
+                        {
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "constant": true,
+                    "inputs": [],
+                    "name": "getAllContracts",
+                    "outputs": [
+                        {
+                            "name": "",
+                            "type": "address[]"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "constant": true,
+                    "inputs": [
+                        {
+                            "name": "queryID",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "getByID",
+                    "outputs": [
+                        {
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                }
+            ];
         
         web3.eth.defaultAccount=web3.eth.accounts[0];
         var testContract = web3.eth.contract(factoryAbiArray);
         var test = testContract.at("0xd83652a2189630f144b5de776591c98dd7899013");
         
-        $("#createnewcontract").click(function() {
-          test.createContract((error,result) => (console.log(result)));
-        
-        });
-        
-          var html2 = ""
-          test.getAllContracts(function(error, allContracts) {
-            html2 += "<ul class=\"list-group\">"
-        
-            for(var j = 0; j < allContracts.length; j++) {
-              html2 += ("<li class=\"list-group-item\">" + allContracts[j] + "</li>")
+        var htmlContracts = "<ul class=\"list-group\">";
+        test.getAllContracts(function(error,result) {
+
+            for(var i = 0; i < result.length; i++) {
+                htmlContracts += "<li class=\"list-group-item\">" + result[i] + "</li>"
             }
-            html2 += "</ul>";
-        
-            document.getElementById("box2").innerHTML = html2;
-          });
-        
+
+            htmlContracts += "</ul>";
+            console.log(htmlContracts);
+            document.getElementById("allContracts").innerHTML = htmlContracts;
+        });
         
         </script>
 
