@@ -80,9 +80,11 @@ contract ethindia {
       loanFill+=(principal*30)/100;
     }
 
+    function getBorrower() constant returns(address){
+      return borrower;
+    }
 
-
-    function submitBid(uint value) public payable {
+    function submitBid(uint value) public  {
       lenders.push(msg.sender);
       lendinghistory.push(value);
     }
