@@ -18,6 +18,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="./../static/js/custom-validate.js"></script>
+        <script src="./../static/abi/ethindia.js"></script>
         <script src="./node_modules/web3/dist/web3.min.js"></script>
 
         <script>
@@ -173,12 +174,23 @@
         
         web3.eth.defaultAccount=web3.eth.accounts[0];
         var testContract = web3.eth.contract(factoryAbiArray);
-        var test = testContract.at("0xd83652a2189630f144b5de776591c98dd7899013");
+        var test = testContract.at("0x0204314d938151c614ea0586A07A4f61D545095B");
         
         var htmlContracts = "<ul class=\"list-group\">";
         test.getAllContracts(function(error,result) {
 
+            let ethindiaContract = web3.eth.contract(contractAbi);
+            console.log(contractAbi);
+
             for(var i = 0; i < result.length; i++) {
+
+                console.log(result[i]);
+                let ethindia = ethindiaContract.at(result[i]);
+
+                ethindia.displayInfo(function(errorx, resultx) {
+                    console.log(resultx);
+                })
+
                 htmlContracts += "<li class=\"list-group-item\">" + result[i] + "</li>"
             }
 
