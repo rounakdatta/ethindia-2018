@@ -1,3 +1,9 @@
-1. Flask server code goes into app.py
-2. All HTML files go into templates directory
-3. All the CSS, JS files go into static/css and static/js respectively
+# ETHIndia 2018 - BLR
+
+![enter image description here](https://ethglobal.co/img/partners/ethindia.png)
+
+## Artha - P2P Crowdsourced Lending on Dharma Protocol
+
+A Blockchain based lending platform over :
+ - **Dharma Protocol** (provides intensive backbone for lending over the blockchain with features of collateral deposit and loan flexibility)
+ - **Ethereum** (powers all the transactions + smart contract)
